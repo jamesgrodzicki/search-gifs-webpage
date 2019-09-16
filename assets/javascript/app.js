@@ -11,6 +11,7 @@ function displayTopics(){
         results = response.data;
         for(var i=0;i<results.length;i++){
             var topicDiv = $("<div>");
+            topicDiv.attr("class", "pic-container")
             var ratingTag = $("<p>");
             $(ratingTag).text("Rating: " + results[i].rating);
             var imgTag = $("<img>");
@@ -37,7 +38,7 @@ $(document).ready(function(){
     renderButtons();
     $(".add-game").on("click", function(event){
         event.preventDefault();
-        var newGame = $("#game-input").val().trim();
+        var newGame = $("#topic-input").val().trim();
         topics.push(newGame);
         renderButtons();
     });
