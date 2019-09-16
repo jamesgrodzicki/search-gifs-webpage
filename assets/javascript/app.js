@@ -36,10 +36,10 @@ function renderButtons(){
 
 $(document).ready(function(){
     renderButtons();
-    $(".add-game").on("click", function(event){
+    $("#submit-button").on("click", function(event){
         event.preventDefault();
-        var newGame = $("#topic-input").val().trim();
-        topics.push(newGame);
+        var newTopic = $("#topic-input").val().trim();
+        topics.push(newTopic);
         renderButtons();
     });
 
