@@ -1,4 +1,4 @@
-var topics = ['Dota 2', 'Fortnite', 'Breath of the Wild'];
+var topics = ['Dota 2', 'Minecraft', 'Breath of the Wild'];
 
 function displayTopics(){
     var userSearch = $(this).attr("data-topic");
@@ -14,7 +14,12 @@ function displayTopics(){
             var ratingTag = $("<p>");
             $(ratingTag).text("Rating: " + results[i].rating);
             var imgTag = $("<img>");
-            imgTag.attr("src", results[i].images.fixed_height_still.url);
+
+            imgTag.attr({"class": "dynamic-pic", 
+                        "src": results[i].images.fixed_height_still.url, 
+                        "data-state": "still",
+                        "data-animate": results[i].images.fixed_height.url, "data-still": results[i].images.fixed_height_still.url});
+
             $(topicDiv).append(imgTag, ratingTag);
             $(".gifs").prepend(topicDiv)
         }
@@ -30,11 +35,23 @@ function renderButtons(){
 
 $(document).ready(function(){
     renderButtons();
-    $("#add-game").on("click", function(event){
+    $(".add-game").on("click", function(event){
         event.preventDefault();
         var newGame = $("#game-input").val().trim();
         topics.push(newGame);
         renderButtons();
+    });
+
+    $(".gifs").on("click", ".dynamic-pic", function() {
+        var state = $(this).attr("data-state");
+        if(state == "still"){
+            $(this).attr("src", $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate");
+        }
+        else{
+            $(this).attr("src", $(this).attr("data-still"));
+            $(this).attr("data-state", "still");
+        }
     });
     $(document).on("click", ".gif-button", displayTopics);
 });
