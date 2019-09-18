@@ -22,7 +22,7 @@ function displayTopics(){
                         "data-animate": results[i].images.fixed_height.url, "data-still": results[i].images.fixed_height_still.url});
 
             $(topicDiv).append(imgTag, ratingTag);
-            $(".gifs").prepend(topicDiv)
+            $(".gifs").prepend(topicDiv);
         }
     })
 }
@@ -41,6 +41,7 @@ $(document).ready(function(){
         var newTopic = $("#topic-input").val().trim();
         topics.push(newTopic);
         renderButtons();
+        $("#topic-input").val("");
     });
 
     $(".gifs").on("click", ".dynamic-pic", function() {
